@@ -4,6 +4,8 @@
 
 **This fork works on Android 6, and does not force landscape mode on Android.**
 
+** Updated to latest pods and plugin framework pod refernce **
+
 
 iOS plugin uses **XCDYouTubeKit** by Cédric Luthi:  
 https://github.com/0xced/XCDYouTubeKit
@@ -20,7 +22,7 @@ https://code.google.com/p/gdata-issues/issues/detail?id=8244
 ##Installation
 
 ```sh
-cordova plugin add https://github.com/JonSmart/CordovaYoutubeVideoPlayer
+cordova plugin add https://github.com/abomadi/CordovaYoutubeVideoPlayer
 ```
 
 ##Usage
