@@ -1,12 +1,14 @@
 //
 //  YoutubeVideoPlayer.m
 //
-//  Created by Adrien Girbone on 15/04/2014.
+//  Fixed and Edited by Abdallah Madi on 13-October-2019.
 //
 //
 
 #import "YoutubeVideoPlayer.h"
 #import "XCDYouTubeKit.h"
+#import "AVFoundation/AVFoundation.h"
+#import <AVKit/AVKit.h>
 
 @implementation YoutubeVideoPlayer
 
@@ -18,11 +20,23 @@
     NSString* videoID = [command.arguments objectAtIndex:0];
     
     if (videoID != nil) {
-        
-        XCDYouTubeVideoPlayerViewController *videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:videoID];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:videoPlayerViewController.moviePlayer];
-        
-        [self.viewController presentMoviePlayerViewControllerAnimated:videoPlayerViewController];
+        AVPlayerViewController *playerViewController = [AVPlayerViewController new];
+        [self.viewController presentViewController:playerViewController animated:YES completion:nil];
+
+        __weak AVPlayerViewController *weakPlayerViewController = playerViewController;
+        [[XCDYouTubeClient defaultClient] getVideoWithIdentifier:videoID completionHandler:^(XCDYouTubeVideo *video, NSError *error){
+            if(video)
+            {
+                NSDictionary *streamURLs = video.streamURLs;
+                NSURL *streamURL = streamURLs[XCDYouTubeVideoQualityHTTPLiveStreaming] ?: streamURLs[@(XCDYouTubeVideoQualityHD720)] ?: streamURLs[@(XCDYouTubeVideoQualityMedium360)] ?: streamURLs[@(XCDYouTubeVideoQualitySmall240)];
+                weakPlayerViewController.player = [AVPlayer playerWithURL:streamURL];
+                [weakPlayerViewController.player play];
+            }
+            else
+            {
+                
+            }
+        }];
         
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         

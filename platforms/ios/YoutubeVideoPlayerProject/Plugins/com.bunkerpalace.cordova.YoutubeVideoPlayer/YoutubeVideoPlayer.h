@@ -1,7 +1,7 @@
 //
-//  YoutubeVideoPlayer.h
+//  YoutubeVideoPlayer.m
 //
-//  Created by Adrien Girbone on 15/04/2014.
+//  Fixed and Edited by Abdallah Madi on 13-October-2019.
 //
 //
 
