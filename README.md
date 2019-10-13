@@ -4,7 +4,7 @@
 
 **This fork works on Android 6, and does not force landscape mode on Android.**
 
-** Updated to latest pods and plugin framework pod refernce **
+**Updated to latest pods and plugin framework pod refernce 13-Oct-2019 WORKING PLUGIN**
 
 
 iOS plugin uses **XCDYouTubeKit** by Cédric Luthi:  
